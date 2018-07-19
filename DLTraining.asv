@@ -9,9 +9,9 @@ function [net, Val_accuracy, d1, d2] =  DLTraining(training_data_path)
     %roughly in the ratio 70:30
     numTrainFiles = 700;
     [TrainingSet, ValidationSet, TestSet]= splitEachLabel(imds,0.7, 0.2, 0.1, 'randomize');
-    %size(TestSet)
-    %size(TrainingSet)
-    %size(ValidationSet)
+    size(TestSet)
+    size(TrainingSet)
+    size(ValidationSet)
     
     %Input layer size is determined by the size of image. Therefore we extract
     %the size in x,y,z dimensions. Z-dimension specify the number of color
@@ -68,7 +68,7 @@ function [net, Val_accuracy, d1, d2] =  DLTraining(training_data_path)
     plot(lgraph)
     %Options specify the hyperparameters needed to train our network
     options = trainingOptions('adam', ...
-        'MaxEpochs',15, ...
+        'MaxEpochs',20, ...
         'ValidationData',ValidationSet, ...
         'ValidationFrequency',30, ...
         'LearnRateDropFactor',0.30,...
@@ -89,8 +89,9 @@ function [net, Val_accuracy, d1, d2] =  DLTraining(training_data_path)
     TestValidation = TestSet.Labels;
     Test_accuracy = sum(TestPred == TestValidation)/ numel(TestValidation);
     
-    fprintf('Val acc: %i\n', Val_accuracy );
-    fprintf('Test acc: %i\n', Test_accuracy );
+    print('Val acc:')
+    fprintf('%i\n', x)
+    print('Test acc:')
     
 end
 
